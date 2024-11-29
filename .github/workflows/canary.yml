@@ -33,6 +33,7 @@ jobs:
           $response = curl -s https://api.github.com/repos/DGP-Studio/Snap.Hutao/pulls?state=open
           $refs = $response | ConvertFrom-Json | Where-Object { $_.draft -eq $false } | ForEach-Object { $_.head.ref }
           foreach ($ref in $refs) {
+              echo "Merging $ref into develop"
               git merge "origin/$ref" --allow-unrelated-histories -m "Merge $ref into develop"
           }
 

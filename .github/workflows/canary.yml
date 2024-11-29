@@ -27,6 +27,8 @@ jobs:
 
       - name: Merge all branches into develop locally
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin '+refs/heads/*:refs/remotes/origin/*'
           $response = curl -s https://api.github.com/repos/DGP-Studio/Snap.Hutao/pulls?state=open
           $refs = $response | ConvertFrom-Json | Where-Object { $_.draft -eq $false } | ForEach-Object { $_.head.ref }
